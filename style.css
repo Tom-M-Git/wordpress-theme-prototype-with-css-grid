@@ -1,0 +1,110 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+body {
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header-1'
+    'child'
+    'additional-footer';
+  grid-gap: 0;
+  min-height: 100vh;
+}
+.grid-container div, .grid-container footer {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 30px;
+  border: 1px solid white;
+}
+.grid-container > nav {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 30px;
+  border: 1px solid white;
+}
+
+.header-widget-1 	{ grid-area:header-1; }
+
+.grid-container-child {
+  grid-area:child;
+  display: grid;
+  grid-template-columns:;
+  grid-template-rows: auto auto auto 1fr auto auto auto;
+  grid-template-areas:
+    'header-default'
+    'header-2'
+    'sidebar-left'
+    'content'
+    'sidebar-right'
+    'footer-1'
+    'footer-default';
+  grid-gap: 0;
+}
+  .default-header 	{ grid-area:header-default; }
+  .header-widget-2 	{ grid-area:header-2; }
+  .secondary			  { grid-area:sidebar-left; }
+  .site-main 			  { grid-area:content; }
+  .widget-sidebar-2 { grid-area:sidebar-right; }
+  #widget-footer-1  { grid-area:footer-1; }
+  .site-footer 	    { grid-area:footer-default; }
+
+#collapsed-sidebar-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+  }
+#collapsed-sidebar {
+  position: fixed;
+  left: -150px;
+  width: 150px;
+  height: 100%;
+  z-index: 98;
+  background-color: rgba(255, 0, 0, 0.5);
+  transition: all 0.3s;
+  }
+#collapsed-sidebar.toggled {
+  left: 0;
+}
+#additional-footer {
+  grid-area: additional-footer;
+}
+
+
+
+@media (min-width: 515px) {
+  #collapsed-sidebar-nav {
+    display: none;
+  }
+  .grid-container {
+    padding-top: 0 !important;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'header-1 header-1'
+      'slidebar child'
+      'additional-footer additional-footer';
+  }
+  .grid-container-child {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      'sidebar-left header-default header-default'
+      'sidebar-left header-2 header-2'
+      'sidebar-left content sidebar-right'
+      'sidebar-left footer-1 footer-1'
+      'sidebar-left footer-default footer-default';
+  }
+  #collapsed-sidebar {
+    position: static;
+    grid-area: slidebar;
+    height: auto;
+  }
+  
+}
